@@ -3,21 +3,21 @@ import datetime
 
 # support vars
 
-weekdays = (("Понедельник", "Пн"),
-			("Вторник", "Вт"),
-			("Среда", "Ср"),
-			("Четверг", "Чт"),
-			("Пятница", "Пт"),
-			("Суббота", "Сб"),
-			("Воскресенье", "Вс"))
+abbrs_weekday = ('Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс')
+
+words_soon_weekday = ("Сегодня", "Завтра", "Послезавтра")
 
 
-# support func
+# support funcs
 
-async def get_style_date(date: object, full_weekday: bool = True) -> str:
+async def get_style_date(date: object) -> str:
 
-	return "{}, {}".format(weekdays[date.weekday()][0] if full_weekday else weekdays[date.weekday()][1],
-		date.day)
+	days_before = (date - datetime.date.today()).days
+	if days_before < 3:
+
+		return "{} ({}), {}".format(words_soon_weekday[days_before], abbrs_weekday[date.weekday()], date.day)
+	else:
+		return "{}, {}".format(abbrs_weekday[date.weekday()], date.day)
 
 
 async def get_style_time(time: object) -> str:
