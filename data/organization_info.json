@@ -1,0 +1,9 @@
+{
+    "shedule": {
+        "begin_time_hour": 11,
+        "end_time_hour": 21
+    },
+    "booking": {
+        "qty_next_dates_booking": 7
+    }
+}
